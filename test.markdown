@@ -19,7 +19,7 @@ Will be made of
 
 1. Header - showing the URL of the feed
 2. Content - showing the feed items
-For each item display:
+Write a directive that displays the feed item. Each item displays:
 * Title 
 * Body
 * Date
@@ -31,9 +31,9 @@ For each item display:
 
 * When searching for an RSS URL, its URL should be inserted to the top of the history list in an “active” (selected) state, and the main section should display its feed.
 * When clicking on an item (URL) from that list, it should get an “active” (selected) state, and the main section should display its feed.
-* The list items should be persistent, should stay on page refresh.
+* When hitting browser back button, it should navigate back to the previous URL that was active
 * Each search history item should also contain an “x” button, to remove that item from the list.
-
+* The list items should be persistent, should stay on page refresh.
 
 
 ## Tools
