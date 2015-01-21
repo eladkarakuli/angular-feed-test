@@ -21,9 +21,9 @@ Will be made of
 2. Content - showing the feed items
 <br>
 Write a directive that displays the feed item. Each item displays:
-* Title 
-* Body
-* Date
+1. Title 
+2. Body
+3. Date
 
 
 ### Search pane
