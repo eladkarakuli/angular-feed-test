@@ -34,7 +34,7 @@ The feed items themselves should be written as a directive that displays the tit
 
 ## RSS feed API
 Google JSON Feed API:
-http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=<num of entries>&q=<URL>
+http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&q=URL
 
 Sample feeds:
 http://www.feedforall.com/sample.xml
