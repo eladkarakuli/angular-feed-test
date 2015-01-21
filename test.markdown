@@ -33,14 +33,14 @@ The feed items themselves should be written as a directive that displays the tit
 * The list items should be persistent, should stay on page refresh.
 
 ## RSS feed API
-Google JSON Feed API:
-http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&q=URL
+Google JSON Feed API:<br>
+http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&q=URL<br>
 
 Sample feeds:
-http://www.feedforall.com/sample.xml
-http://www.feedforall.com/sample-feed.xml
-http://www.feedforall.com/blog-feed.xml
-http://www.rss-specifications.com/blog-feed.xml
+http://www.feedforall.com/sample.xml<br>
+http://www.feedforall.com/sample-feed.xml<br>
+http://www.feedforall.com/blog-feed.xml<br>
+http://www.rss-specifications.com/blog-feed.xml<br>
 
 
 ## Tools
