@@ -19,7 +19,8 @@ Will be made of
 
 1. Header - showing the URL of the feed
 2. Content - showing the feed items
-2.1. Write a directive that displays the feed item. Each item displays:
+<br>
+Write a directive that displays the feed item. Each item displays:
 * Title 
 * Body
 * Date
