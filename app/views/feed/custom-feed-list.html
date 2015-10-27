@@ -1,0 +1,12 @@
+<div>
+    <div ng-show="error" class="alert alert-danger">
+        <h5 class="text-center">Oops... Something bad happened, please try later :(</h5>
+    </div>
+
+    <ul class="media-list">
+        <li ng-repeat="feed in feeds | orderBy:publishedDate:reverse" class="media">
+            <feed-item link="feed.link" title="feed.title" content="feed.content" publishedDate="feed.publishedDate"></feed-item>
+            <hr ng-if="!$last"/>
+        </li>
+    </ul>
+</div>

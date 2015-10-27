@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    //run only trusted code here :)
+function wikipediaFeedPostRender() {
+  $('#wikipedia-feed').find('a').each(function (idx, anchor) {
+    anchor.target = '_new';
+    anchor.href = anchor.href.replace(window.location.origin, 'http://en.wikipedia.org');
+  })
+}
+</script>
+
+<feed id="feed-list" count="10"
+url="http://www.feedforall.com/blog-feed.xml"
+template-url="views/feed/custom-feed-list.html"/>
+
+<div class="row marketing">
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div>
