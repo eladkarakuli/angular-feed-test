@@ -8,6 +8,8 @@
  * Controller of the simpleRssFeedApp
  */
 angular.module('simple-rss-feed')
-  .controller('MainCtrl', ['$scope', 'urlSearchService', function ($scope, urlSearchService) {
-    $scope.selectedUrl = urlSearchService.getSelectedUrl;
+  .controller('MainCtrl', ['$scope', '$stateParams', 'urlSearchService',
+   function ($scope, $stateParams, urlSearchService) {
+   	console.log($stateParams.url);
+    $scope.selectedUrl = $stateParams.url;
   }]);

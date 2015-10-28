@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <base href="/">
+
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
@@ -20,11 +22,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container-fluid main-view">
-      <div class="row">
-        <div class="col-xs-12 col-md-3" ng-include="'views/sidebar.html'" ng-controller="SideBarCtrl"></div>
-        <div class="col-xs-12 col-md-9" ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
-      </div>
+    <div ui-view class="container-fluid main-view">
+      
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -44,6 +43,7 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -55,8 +55,9 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/sidebar.js"></script>
-        <script src="scripts/feed-item/feed-item-directive.js"></script>        
+        <script src="scripts/feed-item/feed-item-directive.js"></script>
         <!-- endbuild -->
+        <script src="routes.js"></script>
 
         <!-- Angular Feeds -->
         <!-- Manualy added until maintainer updates patches -->

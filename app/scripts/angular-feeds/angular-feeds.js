@@ -63,11 +63,11 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
           renderTemplate($templateCache.get('feed-list.html'));
         }).finally(function () {
           $element.find('.spinner').slideUp();
-          $scope.$evalAsync('finishedLoading = true')
+          $scope.$evalAsync('finishedLoading = true');
         });
       }
     }]
-  }
+  };
 }]);
 
 'use strict';

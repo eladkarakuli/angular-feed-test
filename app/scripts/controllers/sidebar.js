@@ -8,10 +8,10 @@
  * Controller of the simple-rss-feed
  */
 angular.module('simple-rss-feed')
-  .controller('SideBarCtrl', ['$scope', 'urlSearchService', function ($scope, urlSearchService) {
+  .controller('SideBarCtrl', ['$scope', 'urlSearchService', '$location', 
+  	function ($scope, urlSearchService, $location) {
   	$scope.search = {};
   	$scope.urls = urlSearchService.urls;
-  	var calls=0;
 
   	$scope.submit = function() {
   		urlSearchService.addUrl($scope.search.url);
@@ -26,16 +26,19 @@ angular.module('simple-rss-feed')
   	}
 
   	$scope.selectUrl = function(url) {
-  		urlSearchService.selectUrl(url);
+  		/*$ urlSearchService.selectUrl(url);*/
+      var encodedUrl = window.encodeURIComponent(url);
+  		$location.path(encodedUrl);
   	}
 
   }])
   .factory('urlSearchService', ['$localStorage', function ($localStorage) {
-  	var urls = $localStorage.urls || [];
+    $localStorage.$reset();
+  	var urls = $localStorage.urls || {};
   	var selectedUrl = {};
 
   	function hasUrl(url) {
-  		return urls.indexOf(url) != -1;
+  		return urls && urls.indexOf(url) !== -1;
   	}
 
   	function getAnyUrl() {
@@ -79,9 +82,10 @@ angular.module('simple-rss-feed')
   	}
 
   	var addUrl = function(url) {
-  		if (!url || hasUrl(url)) return;
-  		addUrlToList(url);
-  		setSelectedUrl(url);
+  		if (!hasUrl(url)) {
+	  		addUrlToList(url);
+	  		setSelectedUrl(url);
+	  	}
   	};
 
   	return {
