@@ -5,7 +5,7 @@ version 0.12.1.
 
 ## Build & development
 
-First time Run `npm insall`
+First time Run `npm insall` then 'bower install'
 
 Run `grunt` for building and `grunt serve` for preview.
 
