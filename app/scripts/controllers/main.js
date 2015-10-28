@@ -8,10 +8,6 @@
  * Controller of the simpleRssFeedApp
  */
 angular.module('simple-rss-feed')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$scope', 'urlSearchService', function ($scope, urlSearchService) {
+    $scope.selectedUrl = urlSearchService.getSelectedUrl;
+  }]);

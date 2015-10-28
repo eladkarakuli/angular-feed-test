@@ -9,4 +9,4 @@
  * Main module of the application.
  */
 angular
-  .module('simple-rss-feed', ['feeds']);
+  .module('simple-rss-feed', ['feeds', 'ngStorage']);

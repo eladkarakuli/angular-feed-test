@@ -1,3 +1,13 @@
+.vertical-center {
+   float:none;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.main-view {
+  margin: 1em;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
