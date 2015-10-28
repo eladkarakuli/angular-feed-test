@@ -25,21 +25,21 @@ angular.module('simple-rss-feed')
         encodeAndNavigateToUrl(url);
         $scope.search.url = null;
       }
-    }
+    };
 
     $scope.remove = function(url) {
       urlSearchService.removeUrl(url);
-    }
+    };
 
     $scope.isUrlActive = function(url) {
       if($stateParams.url) {
         return url === selectedUrl;
       }
-    }
+    };
 
     $scope.selectUrl = function(url) {
       encodeAndNavigateToUrl(url);
-  	}
+  	};
   }])
   .factory('urlSearchService', ['$localStorage', function ($localStorage) {
   	var urls = [];
@@ -53,8 +53,6 @@ angular.module('simple-rss-feed')
         $localStorage.urls = urls;
       }  
     })();
-
-  	var selectedUrl = {};
 
   	function hasUrl(url) {
   		return urls && urls.indexOf(url) !== -1;
@@ -75,13 +73,13 @@ angular.module('simple-rss-feed')
   		if(hasUrl(url)) {
   			removeFromList(url);
   		}
-  	}
+  	};
 
   	var addUrl = function(url) {
   		if (!hasUrl(url)) {
 	  		addUrlToList(url);
 	  	}
-  	}
+  	};
 
   	return {
   		addUrl: addUrl, 
@@ -97,5 +95,5 @@ angular.module('simple-rss-feed')
       decode: function(uri) {
         return window.decodeURIComponent(uri);
       }
-    }
+    };
   });
