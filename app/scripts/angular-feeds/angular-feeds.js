@@ -39,8 +39,6 @@ angular.module('feeds-directives', []).directive('feed', ['feedService', '$compi
 
       function renderTemplate(templateHTML, feedsObj) {
         $element.empty();
-        console.log(feedsObj);
-        console.log($scope.feeds);
         $element.append($compile(templateHTML)($scope));
         if (feedsObj) {
           for (var i = 0; i < feedsObj.length; i++) {

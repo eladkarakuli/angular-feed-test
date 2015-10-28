@@ -10,7 +10,9 @@
 	<div class="jumbotron">
 		<div ng-repeat="url in urls">
 			<div class="btn-group">
-				<span>{{url}}</span><a href="#"><span class="glyphicon glyphicon-remove" ng-click="remove(url)"></span></a>
+				<span class="btn btn-info" ng-class="{'active': isUrlActive(url)}" ng-click="selectUrl(url)">
+					<span>{{url}}</span><a href="#"><span class="glyphicon glyphicon-remove" ng-click="remove(url)"></span></a>
+				</span>
 			</div>
 		</div>
 	</div>

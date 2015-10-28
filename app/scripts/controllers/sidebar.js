@@ -11,6 +11,7 @@ angular.module('simple-rss-feed')
   .controller('SideBarCtrl', ['$scope', 'urlSearchService', function ($scope, urlSearchService) {
   	$scope.search = {};
   	$scope.urls = urlSearchService.urls;
+  	var calls=0;
 
   	$scope.submit = function() {
   		urlSearchService.addUrl($scope.search.url);
@@ -20,23 +21,41 @@ angular.module('simple-rss-feed')
   		urlSearchService.removeUrl(url);
   	}
 
+  	$scope.isUrlActive = function(url) {
+  		return urlSearchService.getSelectedUrl.url === url;
+  	}
+
+  	$scope.selectUrl = function(url) {
+  		urlSearchService.selectUrl(url);
+  	}
+
   }])
   .factory('urlSearchService', ['$localStorage', function ($localStorage) {
-  	var urls = $localStorage.urls;
+  	var urls = $localStorage.urls || [];
   	var selectedUrl = {};
 
   	function hasUrl(url) {
-  		return urls.hasOwnProperty(url);
+  		return urls.indexOf(url) != -1;
   	}
 
   	function getAnyUrl() {
-  		for (var url in urls) {
-  			if(urls.hasOwnProperty(url) ) {
-  				return url;
-  			} 
+  		if (urls.length > 0)
+  		{
+  			return urls[0];
   		}
 
   		return "";
+  	}
+
+  	function removeFromList(url) {
+  		var index = urls.indexOf(url);
+  		if (index > -1) {
+  			urls.splice(index, 1);
+  		}
+  	}
+
+  	function addUrlToList(url) {
+  		urls.unshift(url);
   	}
 
   	function setSelectedUrl(url) {
@@ -45,7 +64,7 @@ angular.module('simple-rss-feed')
 
   	var removeUrl = function(url){
   		if(hasUrl(url)) {
-  			delete urls[url];
+  			removeFromList(url);
 
   			if(selectedUrl.url === url) {
   				setSelectedUrl(getAnyUrl());
@@ -53,20 +72,23 @@ angular.module('simple-rss-feed')
   		}
   	}
 
+  	var selectUrl = function(url) {
+  		if (hasUrl(url)) {
+  			setSelectedUrl(url);
+  		}
+  	}
+
   	var addUrl = function(url) {
   		if (!url || hasUrl(url)) return;
-  		urls[url] = url;
+  		addUrlToList(url);
   		setSelectedUrl(url);
   	};
-
-  	var getSelectedUrl = function(){
-  		return selectedUrl.url;
-  	}
 
   	return {
   		addUrl: addUrl, 
   		removeUrl: removeUrl, 
   		urls: urls,
+  		selectUrl: selectUrl,
   		getSelectedUrl: selectedUrl
   	};
   }]);
