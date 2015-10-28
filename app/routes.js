@@ -2,7 +2,6 @@
 
 angular.module('simple-rss-feed').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 	function($urlRouterProvider, $stateProvider, $locationProvider){
-		$locationProvider.html5Mode(true);
 		$stateProvider
 		.state('home', {
 			url: '/',

@@ -1,19 +1,9 @@
-<script type="text/javascript">
-    //run only trusted code here :)
-function wikipediaFeedPostRender() {
-  $('#wikipedia-feed').find('a').each(function (idx, anchor) {
-    anchor.target = '_new';
-    anchor.href = anchor.href.replace(window.location.origin, 'http://en.wikipedia.org');
-  })
-}
-</script>
-
 <div class="row marketing">
-  <h2 class="text-center">{{selectedUrl.url}}</h2>
+  <h2 class="text-center">{{selectedUrl}}</h2>
 </div>
 
 <div class="row marketing">
   <feed id="feed-list" count="10"
-  url="selectedUrl.url"
+  url="selectedUrl"
   template-url="views/feed/custom-feed-list.html"></feed>
 </div>

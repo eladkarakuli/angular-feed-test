@@ -1,11 +1,16 @@
-.vertical-center {
-   float:none;
-    display:inline-block;
-    vertical-align:middle;
+.history-btn {
+  margin: 0.3em 0em;
 }
 
 .main-view {
   margin: 1em;
+}
+
+.wrap-text { 
+    text-align: left;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .browsehappy {

@@ -2,18 +2,17 @@
 	<form class="form-inline">
 		<div class="form group">
 			<span><input type="text" ng-model="search.url" class="form-control" placeholder="Input URL..."></span>
-			<button class="glyphicon glyphicon-search btn btn-info" ng-click="submit()"></button>
+			<button class="glyphicon glyphicon-search btn btn-info" ng-click="submit(search.url)"></button>
 		</div>
 	</form>
 </div>
 <div class="row">
-	<div class="jumbotron">
-		<div ng-repeat="url in urls">
-			<div class="btn-group">
-				<span class="btn btn-info" ng-class="{'active': isUrlActive(url)}" ng-click="selectUrl(url)">
-					<span>{{url}}</span><a href="#"><span class="glyphicon glyphicon-remove" ng-click="remove(url)"></span></a>
-				</span>
+	<div class="well well-lg">
+		<span ng-repeat="url in urls">
+			<div class="row history-btn">
+				<div class="btn btn-info wrap-text col-md-12" ng-class="{'active': isUrlActive(url)}" ng-click="selectUrl(url)">{{url}}<a class="pull-right" href="#"><span class="glyphicon glyphicon-remove" ng-click="remove(url)"></span></a>
+				</div>
 			</div>
-		</div>
+		</span>
 	</div>
 </div>

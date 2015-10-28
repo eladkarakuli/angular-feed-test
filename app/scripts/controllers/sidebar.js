@@ -8,46 +8,56 @@
  * Controller of the simple-rss-feed
  */
 angular.module('simple-rss-feed')
-  .controller('SideBarCtrl', ['$scope', 'urlSearchService', '$location', 
-  	function ($scope, urlSearchService, $location) {
+  .controller('SideBarCtrl', ['$scope', 'urlSearchService', '$location', 'uriParserService', '$stateParams',
+  	function ($scope, urlSearchService, $location, uriParserService, $stateParams) {
   	$scope.search = {};
   	$scope.urls = urlSearchService.urls;
+    var selectedUrl = uriParserService.decode($stateParams.url);
 
-  	$scope.submit = function() {
-  		urlSearchService.addUrl($scope.search.url);
+    function encodeAndNavigateToUrl(url) {
+      var encodedUri = uriParserService.encode(url);
+  		$location.path(encodedUri);
+    }
+
+    $scope.submit = function(url) {
+      if (url) {
+        urlSearchService.addUrl(url);
+        encodeAndNavigateToUrl(url);
+        $scope.search.url = null;
+      }
+    }
+
+    $scope.remove = function(url) {
+      urlSearchService.removeUrl(url);
+    }
+
+    $scope.isUrlActive = function(url) {
+      if($stateParams.url) {
+        return url === selectedUrl;
+      }
+    }
+
+    $scope.selectUrl = function(url) {
+      encodeAndNavigateToUrl(url);
   	}
-
-  	$scope.remove = function(url) {
-  		urlSearchService.removeUrl(url);
-  	}
-
-  	$scope.isUrlActive = function(url) {
-  		return urlSearchService.getSelectedUrl.url === url;
-  	}
-
-  	$scope.selectUrl = function(url) {
-  		/*$ urlSearchService.selectUrl(url);*/
-      var encodedUrl = window.encodeURIComponent(url);
-  		$location.path(encodedUrl);
-  	}
-
   }])
   .factory('urlSearchService', ['$localStorage', function ($localStorage) {
-    $localStorage.$reset();
-  	var urls = $localStorage.urls || {};
+  	var urls = [];
+    
+    (function initUrlStorage() {
+      if ($localStorage.urls) {
+        urls = $localStorage.urls;
+      }
+      else
+      {
+        $localStorage.urls = urls;
+      }  
+    })();
+
   	var selectedUrl = {};
 
   	function hasUrl(url) {
   		return urls && urls.indexOf(url) !== -1;
-  	}
-
-  	function getAnyUrl() {
-  		if (urls.length > 0)
-  		{
-  			return urls[0];
-  		}
-
-  		return "";
   	}
 
   	function removeFromList(url) {
@@ -61,38 +71,31 @@ angular.module('simple-rss-feed')
   		urls.unshift(url);
   	}
 
-  	function setSelectedUrl(url) {
-  		selectedUrl.url = url;
-  	}
-
   	var removeUrl = function(url){
   		if(hasUrl(url)) {
   			removeFromList(url);
-
-  			if(selectedUrl.url === url) {
-  				setSelectedUrl(getAnyUrl());
-  			}
-  		}
-  	}
-
-  	var selectUrl = function(url) {
-  		if (hasUrl(url)) {
-  			setSelectedUrl(url);
   		}
   	}
 
   	var addUrl = function(url) {
   		if (!hasUrl(url)) {
 	  		addUrlToList(url);
-	  		setSelectedUrl(url);
 	  	}
-  	};
+  	}
 
   	return {
   		addUrl: addUrl, 
-  		removeUrl: removeUrl, 
-  		urls: urls,
-  		selectUrl: selectUrl,
-  		getSelectedUrl: selectedUrl
+  		removeUrl: removeUrl,
+      urls: urls
   	};
-  }]);
+  }])
+  .factory('uriParserService', function() {
+    return {
+      encode: function(uri) {
+        return window.encodeURIComponent(uri);
+      },
+      decode: function(uri) {
+        return window.decodeURIComponent(uri);
+      }
+    }
+  });
