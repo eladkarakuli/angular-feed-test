@@ -8,35 +8,56 @@
  * Controller of the simple-rss-feed
  */
 angular.module('simple-rss-feed')
-  .controller('SideBarCtrl', ['$scope', '$localStorage', 'urlSearchService', function ($scope, $localStorage, urlSearchService) {
+  .controller('SideBarCtrl', ['$scope', 'urlSearchService', function ($scope, urlSearchService) {
   	$scope.search = {};
-  	$scope.$storage = $localStorage;
-  	$scope.$storage.urls = urlSearchService.urls;
+  	$scope.urls = urlSearchService.urls;
 
   	$scope.submit = function() {
   		urlSearchService.addUrl($scope.search.url);
   	}
+
+  	$scope.remove = function(url) {
+  		urlSearchService.removeUrl(url);
+  	}
+
   }])
-  .factory('urlSearchService', function () {
-  	var urls = {};
+  .factory('urlSearchService', ['$localStorage', function ($localStorage) {
+  	var urls = $localStorage.urls;
   	var selectedUrl = {};
 
-  	function getNextId() {
-  		return Object.keys(urls).length;
+  	function hasUrl(url) {
+  		return urls.hasOwnProperty(url);
+  	}
+
+  	function getAnyUrl() {
+  		for (var url in urls) {
+  			if(urls.hasOwnProperty(url) ) {
+  				return url;
+  			} 
+  		}
+
+  		return "";
+  	}
+
+  	function setSelectedUrl(url) {
+  		selectedUrl.url = url;
+  	}
+
+  	var removeUrl = function(url){
+  		if(hasUrl(url)) {
+  			delete urls[url];
+
+  			if(selectedUrl.url === url) {
+  				setSelectedUrl(getAnyUrl());
+  			}
+  		}
   	}
 
   	var addUrl = function(url) {
-  		if (!url) return;
-  		var id = getNextId();
-  		urls[id] = url;
-  		selectedUrl.url = url;
+  		if (!url || hasUrl(url)) return;
+  		urls[url] = url;
+  		setSelectedUrl(url);
   	};
-
-  	var removeUrl = function(id){
-  		if(urls[id]) {
-  			delete urls[id];
-  		}
-  	}
 
   	var getSelectedUrl = function(){
   		return selectedUrl.url;
@@ -48,18 +69,4 @@ angular.module('simple-rss-feed')
   		urls: urls,
   		getSelectedUrl: selectedUrl
   	};
-  });
-  /*.factory('urlSearchCache', ['$scope', '$localStorage', function($scope, $localStorage) {
-  	return {
-      set: function (name, obj) {
-      	$scope.$storage = $localStorage;
-      	$storage.arr = [1, 2, 3, 4];
-      },
-      get: function (name) {
-        if (hasCache(name)) {
-          return angular.fromJson(localStorage.getItem(name));
-        }
-        return null;
-      }
-    };
-  }]);*/
+  }]);

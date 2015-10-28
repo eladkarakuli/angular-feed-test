@@ -2,14 +2,16 @@
 	<form class="form-inline">
 		<div class="form group">
 			<span><input type="text" ng-model="search.url" class="form-control" placeholder="Input URL..."></span>
-			<button class="glyphicon glyphicon-search btn btn-info" aria-hidden="true" ng-click="submit()"></button>
+			<button class="glyphicon glyphicon-search btn btn-info" ng-click="submit()"></button>
 		</div>
 	</form>
 </div>
 <div class="row">
 	<div class="jumbotron">
-		<div ng-repeat="url in $storage.urls">
-			{{url}}
+		<div ng-repeat="url in urls">
+			<div class="btn-group">
+				<span>{{url}}</span><a href="#"><span class="glyphicon glyphicon-remove" ng-click="remove(url)"></span></a>
+			</div>
 		</div>
 	</div>
 </div>
